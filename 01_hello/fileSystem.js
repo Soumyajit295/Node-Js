@@ -1,5 +1,6 @@
 const fs = require('fs')
 
+/* The fs(File System) module allows node js to work with the file system like read write uodate delete any further manupulation in files and directories */
 
 /* Synchronus way to read file */
 console.log(fs.readFileSync('./sample1.txt','utf-8'))
