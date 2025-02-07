@@ -1,0 +1,5 @@
+GET request || /api/users path
+GET request || /api/users/1 path
+POST request || /api/users path
+PUT request || /api/users/4 path
+DELETE request || /api/users/5 path
