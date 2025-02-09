@@ -1,0 +1,8 @@
+2025-02-09T16:32:00.674Z - POST request || /api/users path
+2025-02-09T16:33:00.873Z - POST request || /api/users path
+2025-02-09T16:34:05.314Z - POST request || /api/users path
+2025-02-09T16:35:19.655Z - POST request || /api/users path
+2025-02-09T16:35:38.302Z - GET request || /api/users/67a8d9478ba546b2c9f5dc96 path
+2025-02-09T16:35:49.578Z - GET request || /api/users path
+2025-02-09T16:36:15.815Z - PATCH request || /api/users/67a8d8fd8ba546b2c9f5dc93 path
+2025-02-09T16:37:02.835Z - DELETE request || /api/users/67a8d9478ba546b2c9f5dc96 path
