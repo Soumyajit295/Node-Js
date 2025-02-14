@@ -1,9 +1,16 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const uploadOnCloudinary = require("../utils/cloudinary");
 
 const signup = async (req, res) => {
   const { username, email , password, role } = req.body;
+  let avatar = null
+
+  const localFilePath = req.file.path;
+  if(localFilePath){
+    avatar = await uploadOnCloudinary(localFilePath)
+  }
   
   if (!username || !email || !password) {
     return res.status(400).json({
@@ -22,7 +29,7 @@ const signup = async (req, res) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = await User.create({ username, email, password: hashedPassword, role });
+    const newUser = await User.create({ username, email, password: hashedPassword,avatar : avatar?.secure_url, role });
 
     return res.status(201).json({
       success: true,
