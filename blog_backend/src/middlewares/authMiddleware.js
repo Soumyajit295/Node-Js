@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken')
 
 const isLoggedIn = async(req,res,next)=>{
-    const jwtToken = req.cookies.jwtToken
+    const {jwtToken} = req.cookies
+    
     if(!jwtToken){
         return res.status(400).json({
             success : false,

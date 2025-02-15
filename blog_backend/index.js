@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const cookieParser = require('cookie-parser')
 const userRouter = require('./src/routes/userRoute')
 const blogRouter = require('./src/routes/blogRoute')
 const commentRouter = require('./src/routes/commentRoute')
@@ -13,6 +14,7 @@ databaseConnect()
 // Middlewares
 app.use(express.json())
 app.use(express.urlencoded({extended : false}))
+app.use(cookieParser())
 
 // Routes
 app.use('/api/users',userRouter)
