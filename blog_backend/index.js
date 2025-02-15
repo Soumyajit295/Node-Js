@@ -4,8 +4,11 @@ const userRouter = require('./src/routes/userRoute')
 const blogRouter = require('./src/routes/blogRoute')
 const commentRouter = require('./src/routes/commentRoute')
 const likeRouter = require('./src/routes/likeRoute')
+const databaseConnect = require('./src/database/database')
 
 const app = express()
+
+databaseConnect()
 
 // Middlewares
 app.use(express.json())

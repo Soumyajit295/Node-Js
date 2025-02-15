@@ -1,4 +1,6 @@
-const createNewBlog = async(req,res)=>{}
+const createNewBlog = async(req,res)=>{
+    
+}
 
 const editBlog = async(req,res)=>{}
 
