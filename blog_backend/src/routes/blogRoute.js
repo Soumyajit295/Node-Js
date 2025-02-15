@@ -6,9 +6,9 @@ const upload = require('../middlewares/multerMiddleware')
 const blogRouter = express.Router()
 
 blogRouter.post('/create/:userId',isLoggedIn,upload.single('thumbnail'),createNewBlog)
-blogRouter.put('/edit',editBlog)
-blogRouter.delete('/remove',deleteBlog)
-blogRouter.get('/all-blogs',getAllBlogs)
-blogRouter.get('/:blogId',getSingleBlog)
+blogRouter.put('/edit/:blogId/:userId',isLoggedIn,upload.single('thumbnail'),editBlog)
+blogRouter.delete('/remove/:blogId/:userId',isLoggedIn,deleteBlog)
+blogRouter.get('/:blogId',isLoggedIn,getSingleBlog)
+blogRouter.get('/allblogs',getAllBlogs)
 
 module.exports = blogRouter
