@@ -147,23 +147,23 @@ const getSingleBlog = async(req,res)=>{
 
 const getAllBlogs = async(req,res)=>{
     try{
-        const blogs = await Blog.find({}).populate('author','username email').sort({createdAt : -1})
-        if(!blogs){
-            return res.status(404).json({
+        const blogs = await Blog.find()
+        if(!blogs || blogs.length === 0){
+            return res.status(400).json({
                 success : false,
-                message : "Blogs are not found"
+                message : "No blogs avalabile"
             })
         }
         return res.status(200).json({
             success : true,
-            message : "Blogs fetched successfully",
             data : blogs
         })
     }
     catch(err){
+        console.log(`Error while fetching blogs : ${err.message}`)
         return res.status(500).json({
             success : false,
-            message : "Failed to fetch the blogs"
+            message : "Failed to fetch blogs"
         })
     }
 }
