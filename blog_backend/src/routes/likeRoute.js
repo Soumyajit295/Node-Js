@@ -1,9 +1,8 @@
 const express = require('express')
-const { addLike, getAllLike } = require('../controllers/likeController')
+const { addLike } = require('../controllers/likeController')
+const isLoggedIn = require('../middlewares/authMiddleware')
 
 const likeRouter = express.Router()
 
-likeRouter.post('/addlike',addLike)
-likeRouter.get('/:blogId',getAllLike)
-
+likeRouter.post('/addlike/:blogId/:userId',isLoggedIn,addLike)
 module.exports = likeRouter

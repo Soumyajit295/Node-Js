@@ -171,7 +171,8 @@ const getAllBlogs = async (req, res) => {
           path: "author",
           select: "username",
         },
-      });
+      })
+      .populate('likes','username')
     if (!blogs || blogs.length === 0) {
       return res.status(400).json({
         success: false,
