@@ -36,6 +36,30 @@ const addComment = async(req,res)=>{
     }
 }
 
-const deleteComment = async(req,res)=>{}
+const deleteComment = async(req,res)=>{
+    const {commentId} = req.params
+    try{
+        const comment = await Comment.findById(commentId)
+        if(!comment){
+            return res.status(404).json({
+                success : false,
+                message : "Comment not found"
+            })
+        }
+        const blog = comment?.blog 
+        const deletedCmnt = await Comment.findByIdAndDelete(commentId)
+        await Blog.findByIdAndUpdate(blog,{$pull : {comments : commentId}})
+        return res.status(200).json({
+            success : true,
+            message : "Comment deleted successfully"
+        })
+    }
+    catch(err){
+        return res.status(500).json({
+            success : false,
+            message : "Failed to delete comment!"
+        })
+    }
+}
 
-module.exports = {addComment,deleteComment,getAllComments}
+module.exports = {addComment,deleteComment}
