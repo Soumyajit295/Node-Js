@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle, FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { signupUser } from "../Redux/Slices/userSlice";
 
 function SignupForm() {
   const [userData, setUserData] = useState({
@@ -10,8 +12,10 @@ function SignupForm() {
     password: "",
     avatar: "",
   });
-  const [previewImage, setPreviewImage] = useState(null);
-  const [showPassword, setShowPassword] = useState(false);
+  const [previewImage, setPreviewImage] = useState(null)
+  const [showPassword, setShowPassword] = useState(false)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   function onValueChange(e) {
     const { name, value } = e.target;
@@ -39,9 +43,17 @@ function SignupForm() {
     });
   }
 
-  const handleSignup = (e) => {
+  const handleSignup = async(e) => {
     e.preventDefault();
-    console.log(userData);
+    const formData = new FormData()
+    formData.append('name',userData.name)
+    formData.append('email',userData.email)
+    formData.append('password',userData.password)
+    formData.append('avatar',userData.avatar)
+    const res = await dispatch(signupUser(formData))
+    if(res?.payload?.success){
+      navigate('/login')
+    }
   };
 
   return (

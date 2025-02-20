@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../Redux/Slices/userSlice";
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -8,6 +10,8 @@ function LoginForm() {
     email: "",
     password: "",
   });
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const onValueChange = (e) => {
     const { name, value } = e.target;
@@ -17,9 +21,16 @@ function LoginForm() {
     });
   }
 
-  const onLogin = (e)=>{
+  const onLogin = async(e)=>{
     e.preventDefault()
-    console.log(loginData)
+    const data = {
+      email : loginData.email,
+      password : loginData.password
+    }
+    const res = await dispatch(loginUser(data))
+    if(res?.payload?.success){
+      navigate('/')
+    }
   }
 
   return (

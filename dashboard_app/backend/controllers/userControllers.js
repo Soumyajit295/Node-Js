@@ -13,6 +13,34 @@ const cookieOption = {
     sameSite: "Strict",
 }
 
+const getProfile = async(req,res)=>{
+    if(!req.user){
+        return res.status(400).json({
+            success : false,
+            message : "User not authenticated"
+        })
+    }
+    try{
+        const user = await User.findById(req.user?._id).select('-password')
+        if(!user){
+            return res.status(404).json({
+                success : false,
+                message : "User not found"
+            })
+        }
+        return res.status(200).json({
+            success : true,
+            message : "profile fetched successfully",
+            data : user
+        })
+    }
+    catch(err){
+        return res.status(500).json({
+            success : false,
+            message : "Failed to get profile"
+        })
+    }
+}
 const editName = async(req,res)=>{
     const {name} = req.body
     const {userId} = req.params
@@ -313,4 +341,4 @@ const resetpassword = async(req,res)=>{
     }
 }
 
-module.exports = {editName,changePassword,changeAvatar,sendOTP,deleteAccount,forgetPassword,resetpassword}
+module.exports = {getProfile,editName,changePassword,changeAvatar,sendOTP,deleteAccount,forgetPassword,resetpassword}

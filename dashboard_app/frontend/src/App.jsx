@@ -8,6 +8,8 @@ import SignupForm from './pages/Signup';
 import ForgotPasswordForm from './pages/ForgetPassword';
 import ResetPasswordForm from './pages/ResetPassword';
 
+import axios from 'axios';
+import toast from 'react-hot-toast';
 function App() {
   
   return (
