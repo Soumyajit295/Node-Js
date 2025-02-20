@@ -19,6 +19,13 @@ app.use('/api/auth',authRouter)
 app.use('/api/admin',adminRouter)
 app.use('/api/users',userRouter)
 
+app.get('/api/demo',(req,res)=>{
+    return res.status(200).json({
+        success : true,
+        message : "Demo"
+    })
+})
+
 const PORT = process.env.PORT
 app.listen(PORT,()=>{
     console.log(`Server is listening on port : ${PORT}`)
