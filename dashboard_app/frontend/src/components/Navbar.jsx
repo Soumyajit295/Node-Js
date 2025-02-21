@@ -35,7 +35,7 @@ function Navbar() {
           {
             userData.role === 'admin' && (
               <Link
-              to='/'
+              to='/admin'
               className='px-5 py-1 bg-green-600 rounded-2xl text-slate-100 hover:bg-green-500 cursor-pointer'
               >Admin</Link>
             )
