@@ -1,11 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { sendResetLink } from "../Redux/Slices/userSlice";
 
 function ForgotPasswordForm() {
   const [email,setEmail] = useState('')
+  const dispatch = useDispatch()
 
-  const handleForgetPassword = (e)=>{
+  const handleForgetPassword = async(e)=>{
     e.preventDefault()
-    console.log(email)
+    await dispatch(sendResetLink(email))
   }
   return (
     <div className="w-full min-h-screen flex justify-center items-center">

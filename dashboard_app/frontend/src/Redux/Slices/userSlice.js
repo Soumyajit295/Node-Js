@@ -126,6 +126,35 @@ export const deleteAccount = createAsyncThunk('/users/deleteaccount', async ({ u
     }
 });
 
+export const sendResetLink = createAsyncThunk('/user/sendresetlink',async(email,{rejectWithValue})=>{
+    try{
+        const promise = axios.post('/api/users/forgetpassword',{email})
+        toast.promise(promise,{
+            loading : "Sending reset link",
+            success : (res)=>res?.data?.message,
+            error : (err)=>err?.response?.data?.message
+        })
+        return (await promise).data
+    }   
+    catch(err){
+        return rejectWithValue(err.message)
+    }
+})
+
+export const resetPassword = createAsyncThunk('/users/resetpassword',async({_id,jwtToken,password,confirmPassword},{rejectWithValue})=>{
+    try{
+        const promise = axios.post(`/api/users/resetpassword/${_id}/${jwtToken}`,{password,confirmPassword})
+        toast.promise(promise,{
+            loading : "Reseting password",
+            success : (res)=>res?.data?.message,
+            error : (err)=>err?.response?.data?.message
+        })
+        return (await promise).data
+    }
+    catch(err){
+        return rejectWithValue(err.message)
+    }
+})
 
 
 const userSlice = createSlice({

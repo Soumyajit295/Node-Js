@@ -1,12 +1,24 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { resetPassword } from "../Redux/Slices/userSlice";
 
 function ResetPasswordForm() {
   const [password,setPassword] = useState('')
   const [confirmPassword,setConfirmPassword] = useState('')
 
-  const handleResetPassword = (e)=>{
+  const {_id,jwtToken} = useParams()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  console.log(_id,jwtToken)
+
+  const handleResetPassword = async(e)=>{
     e.preventDefault()
-    console.log(password,confirmPassword)
+    const res = await dispatch(resetPassword({_id,jwtToken,password,confirmPassword}))
+    if(res?.payload?.success){
+      navigate('/login')
+    }
   }
   return (
     <div className="w-full min-h-screen flex justify-center items-center">

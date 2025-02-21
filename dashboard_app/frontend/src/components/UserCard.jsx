@@ -12,7 +12,6 @@ function UserCard() {
   const [editedName, setEditedName] = useState("");
 
   const navigate = useNavigate()
-  
   useEffect(() => {
     dispatch(getProfile());
   }, [dispatch]);
@@ -37,7 +36,7 @@ function UserCard() {
   };
 
   return (
-    <div className="w-[420px] h-[200px] bg-gradient-to-r from-slate-900 to-slate-700 rounded-2xl shadow-lg p-5 flex items-center text-white">
+    <div className="w-[420px] bg-gradient-to-r from-slate-900 to-slate-700 rounded-2xl shadow-lg p-5 flex items-center text-white">
       <div className="w-1/3 flex justify-center items-center">
         <img
           className="w-24 h-24 rounded-full border-4 border-gray-500 shadow-md object-cover"
